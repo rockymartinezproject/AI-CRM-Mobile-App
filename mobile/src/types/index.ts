@@ -77,4 +77,5 @@ export type RootStackParamList = {
   LeadDetail: { leadId: string };
   Compose: { leadId: string };
   AISearch: undefined;
+  About: undefined;
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconButton } from 'react-native-paper';
@@ -14,6 +15,7 @@ import DealsScreen from '../screens/DealsScreen';
 import TasksScreen from '../screens/TasksScreen';
 import AISearchScreen from '../screens/AISearchScreen';
 import ComposeScreen from '../screens/ComposeScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -85,11 +87,18 @@ export default function AppNavigator() {
             options={{
               title: 'AI CRM',
               headerRight: () => (
-                <IconButton
-                  icon="logout"
-                  iconColor="#fff"
-                  onPress={() => dispatch(logout())}
-                />
+                <View style={{ flexDirection: 'row' }}>
+                  <IconButton
+                    icon="information"
+                    iconColor="#fff"
+                    onPress={() => navigation.navigate('About')}
+                  />
+                  <IconButton
+                    icon="logout"
+                    iconColor="#fff"
+                    onPress={() => dispatch(logout())}
+                  />
+                </View>
               ),
             }}
           />
@@ -107,6 +116,11 @@ export default function AppNavigator() {
             name="AISearch"
             component={AISearchScreen}
             options={{ title: 'AI Search' }}
+          />
+          <Stack.Screen
+            name="About"
+            component={AboutScreen}
+            options={{ title: 'About' }}
           />
         </>
       )}

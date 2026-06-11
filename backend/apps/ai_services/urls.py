@@ -9,4 +9,5 @@ urlpatterns = [
     path('transcribe/', views.transcribe_meeting, name='ai-transcribe'),
     path('search/', views.search_natural_language, name='ai-search'),
     path('suggest/', views.realtime_suggestion, name='ai-suggest'),
+    path('about/', views.about, name='ai-about'),
 ]

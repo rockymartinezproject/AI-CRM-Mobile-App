@@ -1,9 +1,10 @@
 import os
 import tempfile
+from django.db.models import Q
+from django.conf import settings
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from django.db.models import Q
 from django.contrib.auth import get_user_model
 from apps.leads.models import Lead
 from apps.tasks.models import Task
@@ -220,3 +221,19 @@ def generate_lead_embedding(request, lead_id):
     lead.embedding = embedding
     lead.save(update_fields=['embedding'])
     return Response({'lead_id': str(lead_id), 'embedding_length': len(embedding)})
+
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def about(request):
+    """Return application version and metadata."""
+    return Response({
+        'name': 'AI CRM',
+        'description': 'Intelligent Customer Relationship Management Platform',
+        'version': '1.0.0',
+        'build': '2024.06.10',
+        'backend': 'Django 4.2 + DRF',
+        'frontend': 'React Native (Expo)',
+        'ai_provider': 'OpenAI',
+        'ai_models': ['gpt-4', 'whisper-1', 'text-embedding-3-small'],
+    })
